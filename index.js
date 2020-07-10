@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+//Import Routes
+const authRoute = require('./routes/auth');
 
 dotenv.config();
 
@@ -12,9 +14,8 @@ mongoose.connect(
   useNewUrlParser: true },
 () => {console.log('Connected to database!')})
 
-//Import Routes
-const authRoute = require('./routes/auth');
-
+//body-parser: lets you read from req.body
+app.use(express.json());
 //Route Middlewares
 app.use('/api/user', authRoute);  //prefix for all routes in auth.js
 
